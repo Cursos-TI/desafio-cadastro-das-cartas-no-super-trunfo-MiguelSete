@@ -13,6 +13,8 @@ int main() {
     float DensidadePopulacional1, DensidadePopulacional2;
     float PIBPerCapita1, PIBPerCapita2;
     float SuperPoder1, SuperPoder2;
+    int pontosJogador1 = 0, pontosJogador2 = 0;
+    int escolha, i;
 
     // Entrada da Carta 1
     printf("Digite o nome do Estado1:\n");
@@ -82,16 +84,67 @@ int main() {
     printf("PIB per Capita: %.2f\n", PIBPerCapita2);
     printf("Super Poder: %.2f\n", SuperPoder2);
 
-    // Comparações
-    printf("\n--- Comparações ---\n");
+    // Menu de atributos
+    printf("\nAtributos disponíveis:\n");
+    printf("1 - População\n");
+    printf("2 - Área\n");
+    printf("3 - PIB\n");
+    printf("4 - Pontos Turísticos\n");
+    printf("5 - Densidade Populacional (menor vence)\n");
+    printf("6 - PIB per Capita\n");
+    printf("7 - Super Poder\n");
 
-    printf("Populacao: %d\n", (Populacao1 > Populacao2)); // 1 se carta1 vence, 0 se carta2
-    printf("Area: %d\n", (Area1 > Area2));
-    printf("PIB: %d\n", (PIB1 > PIB2));
-    printf("Pontos Turisticos: %d\n", (PontosTuristicos1 > PontosTuristicos2));
-    printf("Densidade Populacional (menor vence): %d\n", (DensidadePopulacional1 < DensidadePopulacional2));
-    printf("PIB per Capita: %d\n", (PIBPerCapita1 > PIBPerCapita2));
-    printf("Super Poder: %d\n", (SuperPoder1 > SuperPoder2));
+    // Rodadas de comparação
+    for (i = 1; i <= 3; i++) {
+        printf("\nRodada %d - Escolha um atributo (1 a 7): ", i);
+        scanf("%d", &escolha);
+
+        switch (escolha) {
+            case 1:
+                if (Populacao1 > Populacao2) pontosJogador1++;
+                else if (Populacao2 > Populacao1) pontosJogador2++;
+                break;
+            case 2:
+                if (Area1 > Area2) pontosJogador1++;
+                else if (Area2 > Area1) pontosJogador2++;
+                break;
+            case 3:
+                if (PIB1 > PIB2) pontosJogador1++;
+                else if (PIB2 > PIB1) pontosJogador2++;
+                break;
+            case 4:
+                if (PontosTuristicos1 > PontosTuristicos2) pontosJogador1++;
+                else if (PontosTuristicos2 > PontosTuristicos1) pontosJogador2++;
+                break;
+            case 5:
+                if (DensidadePopulacional1 < DensidadePopulacional2) pontosJogador1++;
+                else if (DensidadePopulacional2 < DensidadePopulacional1) pontosJogador2++;
+                break;
+            case 6:
+                if (PIBPerCapita1 > PIBPerCapita2) pontosJogador1++;
+                else if (PIBPerCapita2 > PIBPerCapita1) pontosJogador2++;
+                break;
+            case 7:
+                if (SuperPoder1 > SuperPoder2) pontosJogador1++;
+                else if (SuperPoder2 > SuperPoder1) pontosJogador2++;
+                break;
+            default:
+                printf("Atributo inválido! Nenhum ponto atribuído nesta rodada.\n");
+        }
+    }
+
+    // Resultado final
+    printf("\n--- Resultado Final ---\n");
+    printf("Pontos Jogador 1: %d\n", pontosJogador1);
+    printf("Pontos Jogador 2: %d\n", pontosJogador2);
+
+    if (pontosJogador1 > pontosJogador2) {
+        printf("Jogador 1 venceu o duelo!\n");
+    } else if (pontosJogador2 > pontosJogador1) {
+        printf("Jogador 2 venceu o duelo!\n");
+    } else {
+        printf("Empate!\n");
+    }
 
     return 0;
 }
